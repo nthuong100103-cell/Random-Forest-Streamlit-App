@@ -5,18 +5,22 @@ import joblib
 # =====================
 # Load artifacts
 # =====================
-MODEL_PATH = "models/RandomForest_best.pkl"
-SCALER_PATH = "models/RandomForest_scaler.pkl"
-FEATURE_PATH = "models/RandomForest_important_features.pkl"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_PATH = os.path.join(BASE_DIR, "models", "RandomForest_best.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "models", "RandomForest_scaler.pkl).pkl")
+ENCODER_PATH = os.path.join(BASE_DIR, "models", "lRandomForest_label_encoders.pkl")
+FEATURE_PATH = os.path.join(BASE_DIR, "models", "RandomForest_important_features.pkl")
 
 @st.cache_resource
 def load_artifacts():
     model = joblib.load(MODEL_PATH)
     scaler = joblib.load(SCALER_PATH)
+    label_encoder = joblib.load(ENCODER_PATH)
     important_features = joblib.load(FEATURE_PATH)
-    return model, scaler, important_features
+    return model, scaler, label_encoder, important_features
 
-model, scaler, important_features = load_artifacts()
+model, scaler, label_encoder, important_features = load_artifacts()
 
 # =====================
 # Page config
@@ -110,3 +114,4 @@ if st.button("🔮 Dự đoán"):
             "Xác suất": probability
         })
     )
+
