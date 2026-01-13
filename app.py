@@ -25,15 +25,15 @@ model, scaler, label_encoders, important_features = load_artifacts()
 # DỊCH TÊN THUỘC TÍNH SANG TIẾNG VIỆT
 # =========================
 feature_name_vi = {
-    'Administrative': 'Số trang quản trị',
-    'Administrative_Duration': 'Thời gian trên trang quản trị',
-    'Informational': 'Số trang thông tin',
-    'Informational_Duration': 'Thời gian trên trang thông tin',
-    'ProductRelated': 'Số trang liên quan đến sản phẩm',
-    'ProductRelated_Duration': 'Thời gian trên trang sản phẩm',
-    'BounceRates': 'Tỷ lệ thoát ngay',
-    'ExitRates': 'Tỷ lệ rời trang',
-    'PageValues': 'Giá trị trang'
+    'Administrative': 'Số trang quản trị (Administrative)',
+    'Administrative_Duration': 'Thời gian trên trang quản trị (Administrative_Duration)',
+    'Informational': 'Số trang thông tin (Informational)',
+    'Informational_Duration': 'Thời gian trên trang thông tin (Informational_Duration)',
+    'ProductRelated': 'Số trang liên quan đến sản phẩm (ProductRelated)',
+    'ProductRelated_Duration': 'Thời gian trên trang sản phẩm ()',
+    'BounceRates': 'Tỷ lệ thoát ngay (BounceRates)',
+    'ExitRates': 'Tỷ lệ rời trang (ExitRates)',
+    'PageValues': 'Giá trị trang (PageValues)'
 }
 
 # Danh sách feature tiếng Việt để hiển thị
@@ -140,5 +140,6 @@ if st.button("🔮 Dự đoán"):
             "Xác suất": probability
         })
     )
+
 
 
