@@ -9,7 +9,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 MODEL_PATH = os.path.join(BASE_DIR, "models", "RandomForest_best.pkl")
-SCALER_PATH = os.path.join(BASE_DIR, "models", "RandomForest_scaler.pkl).pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "models", "RandomForest_scaler(1).pkl")
 ENCODER_PATH = os.path.join(BASE_DIR, "models", "lRandomForest_label_encoders.pkl")
 FEATURE_PATH = os.path.join(BASE_DIR, "models", "RandomForest_important_features.pkl")
 
@@ -115,5 +115,6 @@ if st.button("🔮 Dự đoán"):
             "Xác suất": probability
         })
     )
+
 
 
