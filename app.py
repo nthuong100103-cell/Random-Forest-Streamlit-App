@@ -94,7 +94,7 @@ st.subheader("Thông tin khách truy cập website")
 input_data = {}
 
 num_cols = 4
-features_numeric = [f for f in important_features if f not in label_encoders]
+features_numeric = important_features
 
 for i in range(0, len(features_numeric), num_cols):
     cols = st.columns(num_cols)
@@ -140,4 +140,5 @@ if st.button("🔮 Dự đoán"):
             "Xác suất": probability
         })
     )
+
 
