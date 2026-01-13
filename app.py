@@ -6,12 +6,15 @@ import os
 # =====================
 # Load artifacts
 # =====================
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+import os
+
+BASE_DIR = os.path.dirname(__file__)
 
 MODEL_PATH = os.path.join(BASE_DIR, "models", "RandomForest_best.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "models", "RandomForest_scaler(1).pkl")
-ENCODER_PATH = os.path.join(BASE_DIR, "models", "lRandomForest_label_encoders.pkl")
+ENCODER_PATH = os.path.join(BASE_DIR, "models", "RandomForest_label_encoders.pkl")
 FEATURE_PATH = os.path.join(BASE_DIR, "models", "RandomForest_important_features.pkl")
+
 
 @st.cache_resource
 def load_artifacts():
@@ -115,6 +118,7 @@ if st.button("🔮 Dự đoán"):
             "Xác suất": probability
         })
     )
+
 
 
 
