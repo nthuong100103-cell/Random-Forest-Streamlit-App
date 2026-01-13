@@ -4,12 +4,12 @@ import joblib
 import os
 
 
-BASE_PATH = r"C:\Users\pc\Desktop\Project_Random_Forest_2"
+BASE_DIR = os.path.dirname(__file__)
 
-MODEL_PATH = os.path.join(BASE_PATH, "RandomForest_best.pkl")
-SCALER_PATH = os.path.join(BASE_PATH, "RandomForest_scaler.pkl")
-ENCODER_PATH = os.path.join(BASE_PATH, "RandomForest_label_encoders.pkl")
-FEATURE_PATH = os.path.join(BASE_PATH, "RandomForest_important_features.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, "models", "RandomForest_best.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "models", "RandomForest_scaler.pkl")
+ENCODER_PATH = os.path.join(BASE_DIR, "models", "RandomForest_label_encoders.pkl")
+FEATURE_PATH = os.path.join(BASE_DIR, "models", "RandomForest_important_features.pkl")
 
 @st.cache_resource
 def load_artifacts():
@@ -140,3 +140,4 @@ if st.button("🔮 Dự đoán"):
             "Xác suất": probability
         })
     )
+
