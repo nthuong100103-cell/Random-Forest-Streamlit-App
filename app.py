@@ -7,18 +7,16 @@ import joblib
 # =====================
 MODEL_PATH = "models/RandomForest_best.pkl"
 SCALER_PATH = "models/RandomForest_scaler.pkl"
-ENCODER_PATH = "models/RandomForest_label_encoders.pkl"
 FEATURE_PATH = "models/RandomForest_important_features.pkl"
 
 @st.cache_resource
 def load_artifacts():
     model = joblib.load(MODEL_PATH)
     scaler = joblib.load(SCALER_PATH)
-    label_encoders = joblib.load(ENCODER_PATH)
     important_features = joblib.load(FEATURE_PATH)
-    return model, scaler, label_encoders, important_features
+    return model, scaler, important_features
 
-model, scaler, label_encoders, important_features = load_artifacts()
+model, scaler, important_features = load_artifacts()
 
 # =====================
 # Page config
@@ -74,15 +72,11 @@ for i in range(0, len(important_features), num_cols):
     cols = st.columns(num_cols)
     for col, feature in zip(cols, important_features[i:i + num_cols]):
         with col:
-            if feature in label_encoders:
-                options = label_encoders[feature].classes_
-                input_data[feature] = st.selectbox(
-                    feature, options
-                )
-            else:
-                input_data[feature] = st.number_input(
-                    feature, min_value=0.0, value=0.0
-                )
+            input_data[feature] = st.number_input(
+                label=feature,
+                min_value=0.0,
+                value=0.0
+            )
 
 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -92,14 +86,13 @@ st.markdown("</div>", unsafe_allow_html=True)
 if st.button("🔮 Dự đoán"):
     input_df = pd.DataFrame([input_data])
 
-    # Encode categorical features
-    for col, encoder in label_encoders.items():
-        input_df[col] = encoder.transform(input_df[col])
+    # đảm bảo đúng thứ tự cột như lúc train
+    input_df = input_df[important_features]
 
-    # Scale numerical features
+    # scale
     input_scaled = scaler.transform(input_df)
 
-    # Predict
+    # predict
     prediction = model.predict(input_scaled)[0]
     probability = model.predict_proba(input_scaled)[0]
 
